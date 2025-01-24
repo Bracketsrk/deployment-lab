@@ -1,0 +1,22 @@
+{
+  "name": "deployment-lab",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bracketsrk/deployment-lab.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bracketsrk/deployment-lab/issues"
+  },
+  "homepage": "https://github.com/Bracketsrk/deployment-lab#readme",
+  "description": "",
+  "workspaces": [
+    "packages/*"
+  ]
+}

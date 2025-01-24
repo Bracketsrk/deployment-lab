@@ -1,0 +1,118 @@
+/* .rubik-vinyl-regular {
+    font-family: "Rubik Vinyl", serif;
+    font-weight: 400;
+    font-style: normal;
+}   */
+
+/* * {
+    margin: 0;
+    padding: 0;
+} */
+
+body {
+    margin: 0;
+    font-family: "Noto Serif", serif;
+    font-optical-sizing: auto;
+    /* font-weight: <weight>; */
+    font-style: normal;
+    font-variation-settings:
+      "wdth" 100;
+    color: var(--color-text-body);
+    background-color: var(--color-back-body);
+}
+
+header {
+    padding: 0;
+    margin: 0;
+
+    font-family: "Jersey 15", serif;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--color-text-header);
+    background-color: var(--color-back-header);
+}
+
+h1, h2, h3 {
+    font-family: "Jersey 15", serif;
+    font-weight: 400;
+    font-style: normal;
+    
+}
+
+h1 {
+    padding: 0;
+    margin: 0;
+    font-size: 3rem;
+    color: var(--color-text-header);
+}
+
+h2 {
+    color: var(--color-text-h2);
+}
+
+h3 {
+    color: var(--color-text-h3);
+    /* background-color: #001010; */
+}
+
+dt {
+    color: var(--color-text-dt);
+    /* background-color: #001010; */
+}
+
+a {
+    color: var(--color-text-link);
+}
+
+nav {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.5rem;
+    padding: 1rem;
+    padding-left: 2rem;
+    /* margin: 2rem; */
+}
+
+main {
+    margin: 1.5rem;
+}
+
+.section-head {
+    margin-bottom: 0.5rem;
+}
+
+#nav-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1.7rem;
+    /* padding: 2rem; */
+    /* font-size: 2rem; */
+}
+
+#img-and-about {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 3rem;
+    margin-top: 0;
+}
+
+#contact-info {
+    display: grid;
+    grid-template-columns: 1fr 12fr;
+    justify-items: start;
+    justify-content: start;
+}
+
+
+/* 
+46494C
+B0A1BA
+A5B5BF
+ABC8C7
+B8E2C8
+BFF0D4 
+*/
