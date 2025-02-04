@@ -8,11 +8,15 @@
     --color-text-dt: rgb(34 57 80);
     --color-text-link: rgb(93 102 11);
 
+}
 
-    /* --color-accent: rgb(199 237 237);
-    --color-accent-inverted: rgb(255 208 0);
-    --color-link: var(--color-accent);
-    --color-link-inverted: var(--color-accent-inverted);
-    --color-text: rgb(51 51 51);
-    --color-text-inverted: rgb(255 255 255); */
+body.dark-mode {
+    --color-back-body: rgb(20, 25, 25);
+    --color-back-header: rgb(20, 23, 24);
+    --color-text-body: rgb(202, 245, 216);
+    --color-text-header: rgb(153, 221, 222);
+    --color-text-h2: rgb(153, 221, 222);
+    --color-text-h3: rgb(153, 221, 222);
+    --color-text-dt: rgb(202, 245, 216);
+    --color-text-link: rgb(231, 235, 195);
 }

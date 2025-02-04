@@ -16,10 +16,13 @@ body {
     /* font-weight: <weight>; */
     font-style: normal;
     font-variation-settings:
-      "wdth" 100;
+      "width" 100;
     color: var(--color-text-body);
     background-color: var(--color-back-body);
 }
+
+
+
 
 header {
     padding: 0;
@@ -62,6 +65,7 @@ dt {
 
 a {
     color: var(--color-text-link);
+    text-decoration: none;
 }
 
 nav {
