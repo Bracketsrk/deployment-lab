@@ -1,6 +1,7 @@
 import TodoItem from "./components/TodoItem";
 import AddTaskForm from "./components/AddTaskForm";
 import Modal from "./components/Modal";
+import { GroceryPanel } from "./GroceryPanel";
 import { useState } from "react";
 import { nanoid } from "nanoid";
 
@@ -66,6 +67,7 @@ function App() {
         <main className="m-4 flex flex-col gap-2"> {/* Tailwind: margin level 4 on all sides 
 */}
 
+
             {/* <AddTaskForm onNewTask={addTask} /> */}
             <Modal 
                 children={<AddTaskForm onNewTask={addTask} />} 
@@ -92,6 +94,10 @@ function App() {
                 </ul>
 
             </section>
+
+
+            <GroceryPanel />
+            
         </main>
     );
 }
