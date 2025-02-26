@@ -1,0 +1,42 @@
+/* :root {
+    --color-back-body: rgb(199 237 237);
+    --color-back-header: rgb(199 225 237);
+    --color-text-body: rgb(21 92 45);
+    --color-text-header: rgb(22 78 79);
+    --color-text-h2: rgb(28 98 99);
+    --color-text-h3: rgb(42 97 98);
+    --color-text-dt: rgb(34 57 80);
+    --color-text-link: rgb(93 102 11);
+
+}
+
+body.dark-mode {
+    --color-back-body: rgb(20, 25, 25);
+    --color-back-header: rgb(20, 23, 24);
+    --color-text-body: rgb(202, 245, 216);
+    --color-text-header: rgb(153, 221, 222);
+    --color-text-h2: rgb(153, 221, 222);
+    --color-text-h3: rgb(153, 221, 222);
+    --color-text-dt: rgb(202, 245, 216);
+    --color-text-link: rgb(231, 235, 195);
+} */
+/* 
+:root {
+    --primary: #ff0000;
+    --secondary: #6c757d;
+    --background: #ffffff;
+    --text: #000000;
+    --border: #a9a7a7;
+  }
+  
+  body {
+    transition: all 0.3s ease;
+  }
+  
+  .dark {
+    --primary: #00ffa2;
+    --secondary: #444444;
+    --background: #121212;
+    --text: #ffffff;
+    --border: #333;
+  } */

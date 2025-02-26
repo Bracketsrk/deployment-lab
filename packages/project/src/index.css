@@ -1,0 +1,50 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+html {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html {
+    background-color: white;
+    color: black;
+}
+
+html.dark {
+    background-color: black;
+    color: white;
+}
+
+
+/* .bg-primary {
+    background-color: #007bff;
+  }
+  
+  .text-primary {
+    color: #007bff;
+  }
+  
+  .bg-background {
+    background-color: #ffffff;
+  }
+  
+  .text-text {
+    color: #000000;
+  }
+  
+  /* Dark mode */
+  /* .dark .bg-primary {
+    background-color: #1e90ff;
+  }
+  
+  .dark .text-primary {
+    color: #1e90ff;
+  }
+  
+  .dark .bg-background {
+    background-color: #121212;
+  }
+  
+  .dark .text-text {
+    color: #ffffff;
+  } */ 
