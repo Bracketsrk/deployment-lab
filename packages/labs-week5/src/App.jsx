@@ -96,7 +96,7 @@ function App() {
             </section>
 
 
-            <GroceryPanel />
+            <GroceryPanel onAddTask={addTask}/>
             
         </main>
     );
