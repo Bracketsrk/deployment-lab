@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Spinner } from "./components/Spinner";
-import { groceryFetcher } from "./groceryFetcher";
+import { useGroceryFetch } from "./useGroceryFetch";
 
 const MDN_URL = "https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json";
 
@@ -15,10 +15,8 @@ function delayMs(ms) {
 }
 
 export function GroceryPanel(props) {
-    const [groceryData, setGroceryData] = React.useState([]);
-    const [isLoading, setIsLoading] = React.useState(false);
-    const [filterError, setFilterError] = React.useState(null);
     const [filter, setFilter] = React.useState("MDN");
+    const {groceryData, isLoading, filterError} = useGroceryFetch(filter);
 
 
     function handleAddTodoClicked(item) {
@@ -34,90 +32,6 @@ export function GroceryPanel(props) {
         // fetchData(changeEvent.target.value);
     }
 
-    // async function fetchData(url) {
-    //     setFilterError(false);
-    //     setGroceryData([]);
-    //     setIsLoading(true);
-    //     // await delayMs(2000);
-    //     console.log("fetching data from " + url);
-    //     try {
-    //         // const response = await fetch(url);
-    //         const response = await groceryFetcher.fetch(url)
-    //         // console.log(response);
-    //         // if (!response.ok) {
-    //         //     setIsLoading(false);
-    //         //     setFilterError(true);
-    //         //     throw new Error(`HTTP error: ${response.status}`);
-    //         // }
-    //         // const data = await response.json();
-    //         setIsLoading(false);
-    //         setGroceryData(response)
-    //         return response;
-    //       } catch (error) {
-    //             setIsLoading(false);
-    //             setFilterError(true);
-    //             console.error(`Could not get products: ${error}`);
-    //       }
-    // }
-
-    useEffect(() => {
-        let isStale = false;
-
-        function cleanup() {
-            isStale = true;
-        }
-
-        async function fetchData(url) {
-            if (!isStale) {
-                setFilterError(false);
-            } else {return}
-
-            if (!isStale) {
-                setGroceryData([]);
-            } else {return}
-
-            if (!isStale) {
-                setIsLoading(true);
-            } else {return}
-            
-
-            // await delayMs(2000);
-            console.log("fetching data from " + url);
-            try {
-                // const response = await fetch(url);
-                const response = await groceryFetcher.fetch(url)
-                // console.log(response);
-                // if (!response.ok) {
-                //     setIsLoading(false);
-                //     setFilterError(true);
-                //     throw new Error(`HTTP error: ${response.status}`);
-                // }
-                // const data = await response.json();
-
-                if (!isStale) {
-                    setIsLoading(false);
-                }
-                if (!isStale) {
-                    setGroceryData(response)
-                } else {return}
-                return response;
-
-              } catch (error) {
-                    if (!isStale) {
-                        setIsLoading(false);
-                    } else {return}
-                    if (!isStale) {
-                        setFilterError(true);
-                    } else {return}
-                    console.error(`Could not get products: ${error}`);
-              }
-        }
-
-        fetchData(filter);
-        return cleanup;
-
-        
-    }, [filter]);
 
     return (
         <div>
