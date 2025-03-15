@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import kitchen from '../assets/images/kitchen.jpg';
 
-export function Home(props) {
+export function Home({randomId}: {randomId: number}) {
     return (
         <>
         <div className="flex flex-col gap-[1rem]">
@@ -14,7 +14,7 @@ export function Home(props) {
             <Link className="text-xl col-start-1 col-end-3 text-center text-white bg-orange-900 hover:bg-orange-950 rounded px-[0.5rem] py-[0.5rem] cursor-pointer" to={"/recipes"}>Check out recipes</Link>
             <div className="grid md:grid-cols-2 w-full gap-[1rem]">
                 <Link className="text-xl text-white text-center bg-orange-900 hover:bg-orange-950 rounded px-[0.5rem] py-[0.5rem] cursor-pointer" to={"/ingredients"}>Add ingredients</Link>
-                <Link className="text-xl text-white text-center bg-orange-900 hover:bg-orange-950 rounded px-[0.5rem] py-[0.5rem] cursor-pointer" to={"/recipes/" + props.randomId}>Random Recipe</Link>
+                <Link className="text-xl text-white text-center bg-orange-900 hover:bg-orange-950 rounded px-[0.5rem] py-[0.5rem] cursor-pointer" to={"/recipes/" + randomId}>Random Recipe</Link>
             </div>
             <img className="mb-[3rem]" src={kitchen} />
         </div>

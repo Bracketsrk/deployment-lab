@@ -1,7 +1,7 @@
 import { useRecipeFetching } from "./useRecipeFetching.js";
 import { useParams } from "react-router";
 
-export function Recipe(props) {
+export function Recipe() {
     const { recipeId } = useParams();
     const { isLoading, fetchedRecipes } = useRecipeFetching(recipeId, 500);
     // console.log(recipeId);

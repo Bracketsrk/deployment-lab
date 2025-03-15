@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useQuery } from '@tanstack/react-query'
+
 
 const IMAGES = [
     {
@@ -36,19 +38,98 @@ const IMAGES = [
  * @param delay {number} the number of milliseconds fetching will take
  * @returns {{isLoading: boolean, fetchedImages: ImageData[]}} fetch state and data
  */
-export function useImageFetching(imageId, delay=1000) {
-    const [isLoading, setIsLoading] = useState(true);
-    const [fetchedImages, setFetchedImages] = useState([]);
-    useEffect(() => {
-        setTimeout(() => {
-            if (imageId === "") {
-                setFetchedImages(IMAGES);
-            } else {
-                setFetchedImages(IMAGES.filter((image) => image.id === imageId));
-            }
-            setIsLoading(false);
-        }, delay);
-    }, [imageId]);
+// export function useImageFetching(imageId, delay=1000) {
+//     const [isLoading, setIsLoading] = useState(true);
+//     const [fetchedImages, setFetchedImages] = useState([]);
+//     useEffect(() => {
+//         async () => {
+//             const response = await fetch('/api/images');
+//             print("HERE");
+//             if (!response.ok) {
+//               throw new Error('Network response was not ok');
+//             }
+//             console.log(response.json());
+//             return response.json(); 
+//           };
+//         // setTimeout(async () => {
+//         //     await fetch("/api/images").then(console.log(Response));
+//         //     // console.log("hi2");
+//         //     if (imageId === "") {
+//         //         setFetchedImages(IMAGES);
+//         //     } else {
+//         //         setFetchedImages(IMAGES.filter((image) => image.id === imageId));
+//         //     }
+//         //     setIsLoading(false);
+//         // }, delay);
+//     }, [imageId]);
 
-    return { isLoading, fetchedImages };
-}
+//     // console.log("Here");
+//     // fetch("/api/images").then(console.log(Response));
+//     // // setFetchedImages(Response)
+//     // setIsLoading(false);
+
+//     return { isLoading, fetchedImages };
+// }
+
+const fetchImages = async () => {
+  const response = await fetch('/api/images');
+  
+  if (!response.ok) {
+    throw new Error('Bad response');
+  }
+  
+  return response.json(); 
+};
+
+// const fetchImage = async (imgId) => {
+//   const response = await fetch(`/api/images${imgId}`);
+  
+//   if (!response.ok) {
+//     throw new Error('Bad response');
+//   }
+  
+//   return response.json(); 
+// };
+
+export function useImageFetching() {
+  // if (someParam) {
+  //   return useQuery({
+  //     queryKey: ['image'],
+  //     queryFn: fetchImage 
+  //   })
+  // }
+
+  return useQuery({
+    queryKey: ['images'], 
+    queryFn: fetchImages,
+  });
+};
+
+
+// export async function useImageFetching() {
+//   const fetchImages = async () => {
+//       const response = await fetch('/api/images');
+//       if (!response.ok) {
+//           throw new Error('Network response was not ok');
+//       }
+//       return response.json(); 
+//   };
+
+//   const { status, data, error } = useQuery({
+//     queryKey: ['images'],
+//     queryFn: fetchImages,
+//   });
+
+//   if (status === 'pending') {
+//     return status;
+//   }
+
+//   if (status === 'error') {
+//     return status;
+//   }
+
+//   console.log("data:");
+//   console.log(data);
+
+//   return data;
+// }

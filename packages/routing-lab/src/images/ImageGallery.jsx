@@ -1,4 +1,3 @@
-import { useImageFetching } from "./useImageFetching.js";
 import { Link } from "react-router";
 import "./ImageGallery.css";
 

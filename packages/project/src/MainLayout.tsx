@@ -1,8 +1,14 @@
 import { Header } from "./components/Header.jsx";
 import { Outlet } from "react-router";
-import { useState } from "react";
+import { useState, Ref } from "react";
 
-export function MainLayout(props) {
+interface HeaderProps {
+    isOpen: boolean;
+    ref: Ref<HTMLDivElement> | undefined;
+    setMenuState: (event: React.MouseEvent<HTMLDivElement>) => void;
+}
+
+export function MainLayout({ isOpen, ref, setMenuState }: HeaderProps) {
     const [isDarkMode, setIsDarkMode] = useState(false);
 
     const toggleTheme = () => {
@@ -19,7 +25,7 @@ export function MainLayout(props) {
         <div>
             <div className="flex flex-col items-center">
                 <div className="flex justify-end mb-[1rem]">
-                    <Header ref={props.menuRef} isOpen={props.menuIsOpen} setMenuState={props.toggleMenu} toggleTheme={toggleTheme} />
+                    <Header ref={ref} isOpen={isOpen} setMenuState={setMenuState} toggleTheme={toggleTheme} />
                 </div>
                 <div style={{padding: "0 2em"}}>
                     {/* {props.children} */}

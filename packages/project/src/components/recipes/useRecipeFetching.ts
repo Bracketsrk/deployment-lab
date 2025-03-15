@@ -38,6 +38,14 @@ const RECIPES = [
     }
 ];
 
+interface IRecipeData {
+    id: string,
+    src: string,
+    name: string,
+    ingredients: string,
+    recipe: string
+}
+
 /**
  * Fetches images on component mount.  Returns an object with two properties: isLoading and fetchedImages, which will be
  * an array of ImageData
@@ -46,9 +54,9 @@ const RECIPES = [
  * @param delay {number} the number of milliseconds fetching will take
  * @returns {{isLoading: boolean, fetchedRecipes: RecipeData[]}} fetch state and data
  */
-export function useRecipeFetching(recipeId, delay=1000) {
+export function useRecipeFetching(recipeId: string | undefined, delay=1000) {
     const [isLoading, setIsLoading] = useState(true);
-    const [fetchedRecipes, setFetchedRecipes] = useState([]);
+    const [fetchedRecipes, setFetchedRecipes] = useState<IRecipeData[]>([]);
     useEffect(() => {
         setTimeout(() => {
             if (recipeId === "") {

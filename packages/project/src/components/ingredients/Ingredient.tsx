@@ -1,14 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
-export function Ingredient(props) {
+export function Ingredient({name, num, onDeleteIngr, id}: {name: string, num: number, onDeleteIngr: (ingrId: string) => void, id: string}) {
     return (
         <tr>
-            <td className="p-2">{props.name}</td>
-            <td className="p-2">{props.num}</td>
+            <td className="p-2">{name}</td>
+            <td className="p-2">{num}</td>
             <td className="p-2">
                 <button>
-                    <FontAwesomeIcon icon={faTrashCan} className="text-gray-500 cursor-pointer" title="Delete" onClick={() => props.onDeleteIngr(props.id)} />
+                    <FontAwesomeIcon icon={faTrashCan} className="text-gray-500 cursor-pointer" title="Delete" onClick={() => onDeleteIngr(id)} />
                 </button>
             </td>
         </tr>

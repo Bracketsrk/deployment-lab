@@ -3,10 +3,14 @@ import { nanoid } from "nanoid";
 import { AddIngrForm } from "./AddIngrForm.jsx";
 import { Ingredient } from "./Ingredient.jsx"
 
-// const INITIAL_INGR_LIST = [];
+interface IIngredientData {
+    id: string,
+    name: string,
+    num: number
+}
 
-export function Ingredients(props) {
-    const [ingredientList, setIngrList] = useState(() => {
+export function Ingredients() {
+    const [ingredientList, setIngrList] = useState((): IIngredientData[] => {
         const ingredients = localStorage.getItem('ingredients');
         
         try {
@@ -23,7 +27,7 @@ export function Ingredients(props) {
         localStorage.setItem('ingredients', JSON.stringify(ingredientList));
     }, [ingredientList]);
 
-    function addIngredient(ingredientName, ingredientNum) {
+    function addIngredient(ingredientName: string, ingredientNum: string) {
         if (ingredientName.trim() === "") {
             return;
         }
@@ -37,7 +41,7 @@ export function Ingredients(props) {
         setIngrList([...ingredientList, newIngr]);
     }
 
-    function deleteIngr(ingrId) {
+    function deleteIngr(ingrId: string) {
         const newIngrList = ingredientList.filter(ingr => ingr.id !== ingrId);
         setIngrList(newIngrList);
     }

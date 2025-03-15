@@ -1,18 +1,18 @@
 import { useState } from "react";
 
-export function AddIngrForm({onNewIngr}) {
+export function AddIngrForm({onNewIngr}: {onNewIngr: (ingredientName: string, ingredientNum: string) => void}) {
     const [ingredientName, setIngrName] = useState("");
     const [ingredientNum, setIngrNum] = useState("");
 
-    function handleChange(event) {
+    function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         setIngrName(event.target.value);
     }
 
-    function handleChange2(event) {
+    function handleChange2(event: React.ChangeEvent<HTMLInputElement>) {
         setIngrNum(event.target.value);
     }
 
-    function handleSubmit(event) {
+    function handleSubmit(event: any) {
         event.preventDefault();
         setIngrName("");
         setIngrNum("");
