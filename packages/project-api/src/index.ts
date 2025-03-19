@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
-import { registerImageRoutes } from "./routes/images";
+import { registerRecipeRoutes } from "./routes/recipes";
 
 
 
@@ -27,12 +27,12 @@ const app = express();
 app.use(express.static(staticDir));
 app.use(express.json());
 
-app.get("/hello", (req: Request, res: Response) => {
-    res.send("Hello, World");
-});
+// app.get("/hello", (req: Request, res: Response) => {
+//     res.send("Hello, World");
+// });
 
 setUpSever().then(() => {
-    registerImageRoutes(app, mongoClient);
+    registerRecipeRoutes(app, mongoClient);
 
     app.get("*", (req: Request, res: Response) => {
         console.log("none of the routes above me were matched");

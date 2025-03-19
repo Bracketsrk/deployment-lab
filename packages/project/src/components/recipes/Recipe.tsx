@@ -1,15 +1,41 @@
 import { useRecipeFetching } from "./useRecipeFetching.js";
 import { useParams } from "react-router";
 
+interface IRecipeData {
+    _id: string,
+    src: string,
+    name: string,
+    ingredients: string,
+    recipe: string,
+    author: string
+}
+
 export function Recipe() {
     const { recipeId } = useParams();
-    const { isLoading, fetchedRecipes } = useRecipeFetching(recipeId, 500);
+    // const { isLoading, fetchedRecipes } = useRecipeFetching(recipeId, 500);
+
+    const { data, error, isLoading } = useRecipeFetching();
+
+    if (isLoading) {
+      return <div>Loading recipes...</div>;
+    }
+
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    }
+
     // console.log(recipeId);
 
     if (isLoading) {
         return <div>Loading...</div>;
     }
-    const recipeData = fetchedRecipes[0];
+
+    if (!data) {
+        return <div>Couldn't fetch recipe data</div>;
+    }
+    // const recipeData = fetchedRecipes[0];
+    // const imageData = data.find(image => image._id === imgId);
+    const recipeData = data.find(recipe => recipe._id === recipeId);
     if (!recipeData) {
         return <div><h2>Recipe not found</h2></div>;
     }

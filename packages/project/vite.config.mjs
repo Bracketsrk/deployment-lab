@@ -6,5 +6,10 @@ import checker from 'vite-plugin-checker'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss(), checker({ typescript: true })],
-  base: ""
+  base: "",
+  server: {
+    proxy: {
+        "/api": "http://localhost:3000" // Forwards all requests at localhost:5173/api/*
+    }
+  }
 })

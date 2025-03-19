@@ -9,6 +9,15 @@ import { Home } from './components/Home.jsx';
 
 import './App.css'
 
+// interface IRecipeData {
+//   _id: string,
+//   src: string,
+//   name: string,
+//   ingredients: string,
+//   recipe: string,
+//   author: string
+// }
+
 function App() {
   const [menuIsOpen, setMenu] = useState(false);
   // const menuRef = useRef(null)
@@ -35,16 +44,31 @@ function App() {
   }, [menuIsOpen]);
 
 
-  const { isLoading, fetchedRecipes } = useRecipeFetching("");
+  // const { isLoading, fetchedRecipes } = useRecipeFetching("");
+  const { data, error, isLoading } = useRecipeFetching();
+  
+  if (isLoading) {
+    return <div>Loading recipes...</div>;
+  }
 
-  const recipeElements = fetchedRecipes.map((recipe) => (
-      <div key={recipe.id}>
-          <Link to={"/recipes/" + recipe.id}>
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  if (!data) {
+    return <div>Couldn't fetch recipe data</div>;
+  }
+
+  const recipeElements = data.map(recipe => (
+      <div key={recipe._id}>
+          <Link to={"/recipes/" + recipe._id}>
               <img src={recipe.src} alt={recipe.name}/>
               <p className="text-md font-bold text-center p-[.5rem]">{recipe.name}</p>
           </Link>
       </div>
   ));
+  // console.log("here");
+  // console.log(recipeElements);
 
   function getRandomRecipe() {
     return Math.floor(Math.random() * recipeElements.length);
