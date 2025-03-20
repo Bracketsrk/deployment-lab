@@ -2,6 +2,8 @@ import express, { Request, Response } from "express";
 import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 import { registerRecipeRoutes } from "./routes/recipes";
+import { registerAuthRoutes } from "./routes/auth";
+import { verifyAuthToken } from "./routes/auth";
 
 
 
@@ -32,6 +34,9 @@ app.use(express.json());
 // });
 
 setUpSever().then(() => {
+    registerAuthRoutes(app, mongoClient);
+    // UNCOMMENT
+    // app.use("/api/*", verifyAuthToken);
     registerRecipeRoutes(app, mongoClient);
 
     app.get("*", (req: Request, res: Response) => {
