@@ -2,33 +2,33 @@ import { useEffect, useState } from "react";
 import { useQuery } from '@tanstack/react-query'
 
 
-const IMAGES = [
-    {
-        id: "0",
-        src: "https://upload.wikimedia.org/wikipedia/commons/3/33/Blue_merle_koolie_short_coat_heading_sheep.jpg",
-        name: "Blue merle herding sheep"
-    },
-    {
-        id: "1",
-        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Huskiesatrest.jpg/2560px-Huskiesatrest.jpg",
-        name: "Huskies"
-    },
-    {
-        id: "2",
-        src: "https://upload.wikimedia.org/wikipedia/commons/6/6b/Taka_Shiba.jpg",
-        name: "Shiba"
-    },
-    {
-        id: "3",
-        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Felis_catus-cat_on_snow.jpg/2560px-Felis_catus-cat_on_snow.jpg",
-        name: "Tabby cat"
-    },
-    {
-        id: "4",
-        src: "https://upload.wikimedia.org/wikipedia/commons/8/84/Male_and_female_chicken_sitting_together.jpg",
-        name: "Chickens"
-    }
-];
+// const IMAGES = [
+//     {
+//         id: "0",
+//         src: "https://upload.wikimedia.org/wikipedia/commons/3/33/Blue_merle_koolie_short_coat_heading_sheep.jpg",
+//         name: "Blue merle herding sheep"
+//     },
+//     {
+//         id: "1",
+//         src: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Huskiesatrest.jpg/2560px-Huskiesatrest.jpg",
+//         name: "Huskies"
+//     },
+//     {
+//         id: "2",
+//         src: "https://upload.wikimedia.org/wikipedia/commons/6/6b/Taka_Shiba.jpg",
+//         name: "Shiba"
+//     },
+//     {
+//         id: "3",
+//         src: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Felis_catus-cat_on_snow.jpg/2560px-Felis_catus-cat_on_snow.jpg",
+//         name: "Tabby cat"
+//     },
+//     {
+//         id: "4",
+//         src: "https://upload.wikimedia.org/wikipedia/commons/8/84/Male_and_female_chicken_sitting_together.jpg",
+//         name: "Chickens"
+//     }
+// ];
 
 /**
  * Fetches images on component mount.  Returns an object with two properties: isLoading and fetchedImages, which will be
@@ -71,8 +71,12 @@ const IMAGES = [
 //     return { isLoading, fetchedImages };
 // }
 
-const fetchImages = async () => {
-  const response = await fetch('/api/images');
+const fetchImages = async (authToken) => {
+  const response = await fetch('/api/images', {
+    headers: {
+      "Authorization": `Bearer ${authToken}`
+    }
+  });
   
   if (!response.ok) {
     throw new Error('Bad response');
@@ -91,7 +95,7 @@ const fetchImages = async () => {
 //   return response.json(); 
 // };
 
-export function useImageFetching() {
+export function useImageFetching({authToken}) {
   // if (someParam) {
   //   return useQuery({
   //     queryKey: ['image'],

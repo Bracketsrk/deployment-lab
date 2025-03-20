@@ -12,7 +12,7 @@ export function registerRecipeRoutes(app: express.Application, mongoClient: Mong
         const recipesProvider = new RecipeProvider(mongoClient);
         if (typeof req.query.createdBy === "string") {
             userId = req.query.createdBy;
-            console.log(userId);
+            // console.log(userId);
             const recipes = await recipesProvider.getAllRecipes(userId);
             res.send(recipes);
         }
@@ -20,6 +20,16 @@ export function registerRecipeRoutes(app: express.Application, mongoClient: Mong
             const recipes = await recipesProvider.getAllRecipes();
             res.send(recipes);
         }
+    });
+
+    app.get("/api/recipes/:id", async (req: Request, res: Response) => {
+        const recipeId = req.params.id;
+        console.log(`Received request at /api/recipes/${recipeId}`);
+
+        const recipesProvider = new RecipeProvider(mongoClient);
+        const recipe = await recipesProvider.getRecipe(recipeId);
+        // console.log(recipe);
+        res.send(recipe);
     });
 
 

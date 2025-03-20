@@ -12,6 +12,8 @@ export function Header() {
                 <nav>
                     <Link to="/">Home</Link>
                     <Link to="/images">Image Gallery</Link>
+                    <Link to="/login">Login</Link>
+                    <Link to="/register">Register</Link>
                     <Link to="/account">Account</Link>
                 </nav>
             </div>

@@ -1,10 +1,11 @@
 import { useParams } from "react-router";
 import { useImageFetching } from "./useImageFetching.js";
+import { ProtectedRoute } from "../auth/ProtectedRoute";
 
 export function ImageDetails(props) {
     const { imgId } = useParams();
     // const { isLoading, fetchedImages } = useImageFetching(imgId, 500);
-    const { data, error, isLoading } = useImageFetching();
+    const { data, error, isLoading } = useImageFetching(props.authToken);
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -24,8 +25,10 @@ export function ImageDetails(props) {
 
     return (
         <div>
-            <h2>{imageData.name}</h2>
-            <img className="ImageDetails-img" src={imageData.src} alt={imageData.name} />
+            <ProtectedRoute authToken={props.authToken}>
+                <h2>{imageData.name}</h2>
+                <img className="ImageDetails-img" src={imageData.src} alt={imageData.name} />
+            </ProtectedRoute>
         </div>
     )
 }

@@ -2,6 +2,8 @@ import express, { Request, Response } from "express";
 import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 import { registerImageRoutes } from "./routes/images";
+import { registerAuthRoutes } from "./routes/auth";
+import { verifyAuthToken } from "./routes/auth";
 
 
 
@@ -27,11 +29,14 @@ const app = express();
 app.use(express.static(staticDir));
 app.use(express.json());
 
-app.get("/hello", (req: Request, res: Response) => {
-    res.send("Hello, World");
-});
+// app.get("/hello", (req: Request, res: Response) => {
+//     res.send("Hello, World");
+// });
 
 setUpSever().then(() => {
+    registerAuthRoutes(app, mongoClient);
+    // UNCOMMENT
+    app.use("/api/*", verifyAuthToken);
     registerImageRoutes(app, mongoClient);
 
     app.get("*", (req: Request, res: Response) => {

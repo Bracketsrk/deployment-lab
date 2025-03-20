@@ -1,0 +1,43 @@
+### This is a comment
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{ "username": "newuser", "password": "passtest" }
+
+
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{ "username": "newuser2", "password": "passtest" }
+
+
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{ "username": "newuser" }
+
+### Login tests
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{ "username": "newuser", "password": "passtest" }
+
+
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{ "username": "newuser2", "password": "passtest" }
+
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{ "username": "newuser" }
+
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{ "username": "newuser", "password": "passt" }
+
+
+### A second example, each request should be delimited by a triple hash
+GET http://localhost:3000/api/images

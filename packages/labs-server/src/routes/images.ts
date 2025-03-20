@@ -54,14 +54,6 @@ export function registerImageRoutes(app: express.Application, mongoClient: Mongo
         }
         
 
-        // const itemId = parseInt(req.params.id);
-        // const updatedItem = req.body;
-  
-        // data.items = data.items.map((item) =>
-        //   item.id === itemId ? { ...item, ...updatedItem } : item
-        // );
-  
-        // res.json({ message: 'Item updated successfully', item: data.items.find(item => item.id === itemId) });
       });
   
     

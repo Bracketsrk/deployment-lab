@@ -59,6 +59,23 @@ export class RecipeProvider {
         }
     }
 
+
+    async getRecipe(recipeId: string): Promise<RecipeDocument> {
+        const recipeCollectionName = process.env.RECIPES_COLLECTION_NAME;
+        if (!recipeCollectionName) {
+            throw new Error("Missing RECIPES_COLLECTION_NAME from environment variables");
+        }
+        const recipesCollection = this.mongoClient.db().collection<RecipeDocument>(recipeCollectionName); 
+
+        const result = await recipesCollection.findOne({ _id: recipeId });
+
+        if (!result) {
+            throw new Error(`Recipe with ID ${recipeId} not found`);
+        }
+        return result;
+    }
+
+
     async updateRecipeName(recipeId: string, newName: string): Promise<number> {
         const recipeCollectionName = process.env.RECIPES_COLLECTION_NAME;
         if (!recipeCollectionName) {
