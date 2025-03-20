@@ -8,10 +8,10 @@ export function ImageDetails(props) {
     const { data, error, isLoading } = useImageFetching(props.authToken);
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <ProtectedRoute authToken={props.authToken}><div>Loading...</div>;</ProtectedRoute>
     }
     if (error) {
-        return <div>Error: {error.message}</div>;
+        return <ProtectedRoute authToken={props.authToken}><div>Error: {error.message}</div>;</ProtectedRoute>
     }
     // console.log("BLKASJDLKAJ");
     // console.log(data);

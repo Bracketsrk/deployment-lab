@@ -72,6 +72,7 @@ import { useQuery } from '@tanstack/react-query'
 // }
 
 const fetchImages = async (authToken) => {
+  console.log(`Bearer ${authToken}`)
   const response = await fetch('/api/images', {
     headers: {
       "Authorization": `Bearer ${authToken}`
@@ -95,17 +96,17 @@ const fetchImages = async (authToken) => {
 //   return response.json(); 
 // };
 
-export function useImageFetching({authToken}) {
+export function useImageFetching(authToken) {
   // if (someParam) {
   //   return useQuery({
   //     queryKey: ['image'],
   //     queryFn: fetchImage 
   //   })
   // }
-
+  console.log(authToken);
   return useQuery({
-    queryKey: ['images'], 
-    queryFn: fetchImages,
+    queryKey: ['images', authToken], 
+    queryFn: () => fetchImages(authToken),
   });
 };
 
