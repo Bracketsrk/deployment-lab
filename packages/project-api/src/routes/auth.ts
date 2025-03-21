@@ -11,6 +11,16 @@ if (!signatureKey) {
     throw new Error("Missing JWT_SECRET from env file");
 }
 
+
+function decodeJWT(token: string) {
+    const base64Url = token.split('.')[1]; 
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const data = atob(base64); 
+
+    return JSON.parse(data); 
+}
+
+
 function generateAuthToken(username: string): Promise<string> {
     return new Promise<string>((resolve, reject) => {
         jwt.sign(
@@ -122,6 +132,63 @@ export function registerAuthRoutes(app: express.Application, mongoClient: MongoC
         }
         // res.send(status);
     
+    });
+
+
+    app.post("/auth/changePassword", async (req: Request, res: Response) => {
+        const oldPass = req.body.password;
+        const newPass = req.body.newPassword;
+        const jwt = req.body.jwt;
+
+        if (!oldPass) {
+            res.status(400).send({
+                error: "Missing field",
+                message: "Missing username or password"
+            });
+            return;
+        }
+        if (!newPass) {
+            res.status(400).send({
+                error: "Missing field",
+                message: "Missing username or password"
+            });
+            return;
+        }
+        if (!jwt) {
+            res.status(400).send({
+                error: "Missing field",
+                message: "Missing authorization"
+            });
+            return;
+        }
+        const jwtData = await decodeJWT(jwt);
+        // console.log("here");
+        const username = jwtData.username;
+        // console.log(jwtData);
+        const credentialsProvider = new CredentialsProvider(mongoClient);
+        const status: boolean = await credentialsProvider.verifyPassword(username, oldPass);
+
+        if (!status) {
+            res.status(400).send({
+                error: "Bad password",
+                message: "Incorrect password"
+            });
+            return;
+        }
+
+        const newStatus: boolean = await credentialsProvider.changePassword(username, newPass);
+    
+        if (!newStatus) {
+            res.status(500).send({
+                error: "Password change error",
+                message: "Error changing password"
+            });
+            return;
+        }
+        else {
+            res.status(200).send();
+            return;
+        }
     });
     
 }

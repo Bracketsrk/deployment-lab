@@ -36,7 +36,7 @@ app.use(express.json());
 setUpSever().then(() => {
     registerAuthRoutes(app, mongoClient);
     // UNCOMMENT
-    // app.use("/api/*", verifyAuthToken);
+    app.use("/api/*", verifyAuthToken); 
     registerRecipeRoutes(app, mongoClient);
 
     app.get("*", (req: Request, res: Response) => {

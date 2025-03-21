@@ -26,6 +26,7 @@ export function Header({ isOpen, ref, setMenuState, toggleTheme }: HeaderProps) 
                             <Link to={"/recipes"}><li className="text-gray-800 hover:text-blue-600 ">Recipes</li></Link>
                             <Link to={"/ingredients"}><li className="text-gray-800 hover:text-blue-600 ">Ingredients</li></Link>
                             <li className="text-gray-800 hover:text-blue-600 " onClick={() => toggleTheme()}>Color</li>
+                            <Link to={"/account"}><li className="text-gray-800 hover:text-blue-600 ">Account</li></Link>
                         </ul>
                     </nav>
                 </div>

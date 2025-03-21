@@ -6,6 +6,9 @@ import { Recipes } from './components/recipes/Recipes.jsx';
 import { Ingredients } from './components/ingredients/Ingredients.jsx';
 import { useRecipeFetching } from "./components/recipes/useRecipeFetching.js";
 import { Home } from './components/Home.jsx';
+import { RegisterPage } from './auth/RegisterPage.js';
+import { LoginPage } from './auth/LoginPage.js';
+import { AccountSettings } from './auth/AccountSettings.js';
 
 import './App.css'
 
@@ -19,6 +22,11 @@ import './App.css'
 // }
 
 function App() {
+  const [authToken, setAuthToken] = useState("");
+  function handleAuthToken(token: string) {
+    setAuthToken(token);
+  }
+
   const [menuIsOpen, setMenu] = useState(false);
   // const menuRef = useRef(null)
   // const menuRef = useRef<HTMLElement | null>(null);
@@ -42,46 +50,22 @@ function App() {
 
     document.body.addEventListener('click', handleClickOutside);
   }, [menuIsOpen]);
-
-
-  // const { isLoading, fetchedRecipes } = useRecipeFetching("");
-  const { data, error, isLoading } = useRecipeFetching();
   
-  if (isLoading) {
-    return <div>Loading recipes...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-
-  if (!data) {
-    return <div>Couldn't fetch recipe data</div>;
-  }
-
-  const recipeElements = data.map(recipe => (
-      <div key={recipe._id}>
-          <Link to={"/recipes/" + recipe._id}>
-              <img src={recipe.src} alt={recipe.name}/>
-              <p className="text-md font-bold text-center p-[.5rem]">{recipe.name}</p>
-          </Link>
-      </div>
-  ));
   // console.log("here");
   // console.log(recipeElements);
 
-  function getRandomRecipe() {
-    return Math.floor(Math.random() * recipeElements.length);
-  }
 
   return (
     // <main onClick={checkMenu}>
       <Routes>
             <Route path="/" element={<MainLayout ref={menuRef} isOpen={menuIsOpen} setMenuState={toggleMenu} />}>
-                <Route index element={<Home randomId={getRandomRecipe()} />}/>
-                <Route path="/recipes" element={<Recipes isLoading={isLoading} recipeElements={recipeElements}/>} />
-                <Route path="/recipes/:recipeId" element={<Recipe />} />
-                <Route path="/ingredients" element={<Ingredients />} />
+                <Route index element={<Home authToken={authToken} />}/>
+                <Route path="/recipes" element={<Recipes authToken={authToken} />} />
+                <Route path="/recipes/:recipeId" element={<Recipe authToken={authToken} />} />
+                <Route path="/ingredients" element={<Ingredients authToken={authToken} />} />
+                <Route path="/register" element={<RegisterPage handleAuthToken={handleAuthToken} />} />
+                <Route path="/login" element={<LoginPage handleAuthToken={handleAuthToken} />} />
+                <Route path="/account" element={<AccountSettings authToken={authToken} />} />
             </Route>
         </Routes>
         // <Recipe menuRef={menuRef} isOpen={menuIsOpen} setMenuState={toggleMenu} />

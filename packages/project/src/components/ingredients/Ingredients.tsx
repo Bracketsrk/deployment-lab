@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 import { AddIngrForm } from "./AddIngrForm.jsx";
-import { Ingredient } from "./Ingredient.jsx"
+import { Ingredient } from "./Ingredient.jsx";
+import { ProtectedRoute } from "../../auth/ProtectedRoute.js";
 
 interface IIngredientData {
     id: string,
@@ -9,7 +10,7 @@ interface IIngredientData {
     num: number
 }
 
-export function Ingredients() {
+export function Ingredients({authToken}: {authToken: string}) {
     const [ingredientList, setIngrList] = useState((): IIngredientData[] => {
         const ingredients = localStorage.getItem('ingredients');
         
@@ -47,37 +48,39 @@ export function Ingredients() {
     }
 
     const ingredientElements = ingredientList?.map((ingr) => (
-        <Ingredient id={ingr.id} name={ingr.name} num={ingr.num} key={ingr.id} onDeleteIngr={deleteIngr} />
+        <Ingredient id={ingr.id} name={ingr.name} num={ingr.num} key={ingr.id} onDeleteIngr={deleteIngr} authToken={authToken} />
     ));
 
     return (
         <>
-        <div>
-            <AddIngrForm onNewIngr={addIngredient}/>
+        <ProtectedRoute authToken={authToken}>
+            <div>
+                <AddIngrForm onNewIngr={addIngredient} authToken={authToken}/>
 
-            <section className="flex flex-col gap-1 mt-[1rem]">
-                <h1 className="text-2xl font-bold text-center">Ingredients</h1>
-                <hr className="mt-[.25rem] mb-[1rem]" />
-                
-                <table className="table-auto w-full text-xl border-collapse">
-                    <thead>
-                        <tr>
-                            <th className="border-b-2 p-2 text-left">Ingredient</th>
-                            <th className="border-b-2 p-2 text-left">Amount</th>
-                            <th className="border-b-2 p-2 text-left">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <section className="flex flex-col gap-1 mt-[1rem]">
+                    <h1 className="text-2xl font-bold text-center">Ingredients</h1>
+                    <hr className="mt-[.25rem] mb-[1rem]" />
+                    
+                    <table className="table-auto w-full text-xl border-collapse">
+                        <thead>
+                            <tr>
+                                <th className="border-b-2 p-2 text-left">Ingredient</th>
+                                <th className="border-b-2 p-2 text-left">Amount</th>
+                                <th className="border-b-2 p-2 text-left">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {ingredientElements}
+                        </tbody>
+                    </table>
+                    {/* <ul role="list" className="text-xl">
                         {ingredientElements}
-                    </tbody>
-                </table>
-                {/* <ul role="list" className="text-xl">
-                    {ingredientElements}
-                </ul> */}
+                    </ul> */}
 
-            </section>
-            
-        </div>
+                </section>
+                
+            </div>
+        </ProtectedRoute>
         </>
     )
 }
